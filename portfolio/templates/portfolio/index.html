@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pratham Sharma | Portfolio</title>
-    <!-- Using Tailwind CSS for clean, single-file styling -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@300;400;600;800&display=swap');
@@ -18,7 +17,6 @@
         }
         .font-mono { font-family: 'JetBrains Mono', monospace; }
         
-        /* 3D Lighting / Ambient Glow Effects */
         .ambient-glow {
             position: absolute;
             border-radius: 50%;
@@ -38,7 +36,6 @@
 </head>
 <body class="relative antialiased selection:bg-teal-500/30">
 
-    <!-- Ambient Background Glows -->
     <div class="ambient-glow glow-cyan"></div>
     <div class="ambient-glow glow-orange"></div>
 
@@ -70,12 +67,10 @@
             Pratham <span class="text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-500">Sharma</span>
         </h1>
         
-        <!-- Updated Titles for AI/ML -->
         <p class="text-gray-400 tracking-[0.2em] font-mono uppercase text-sm md:text-base max-w-2xl leading-relaxed">
             AI/ML Engineer <span class="text-teal-500 px-2">•</span> NLP Specialist <span class="text-teal-500 px-2">•</span> Java & Python Developer
         </p>
         
-        <!-- Updated Summary -->
         <p class="mt-8 text-gray-300 max-w-2xl text-base md:text-lg leading-relaxed">
             I am a CS student at LPU specializing in AI/ML. Passionate about Natural Language Processing, I leverage Java and Python to build intelligent algorithms and scalable, data-driven solutions.
         </p>
@@ -239,9 +234,9 @@
             <p>pratham2149@gmail.com | +91 8278735288</p>
         </div>
 
-        <!-- DOWNLOAD RESUME BUTTON -->
+        <!-- DOWNLOAD RESUME BUTTON — fixed filename -->
         <div class="pt-8 border-t border-white/10">
-            <a href="{% static 'pratham_resume.pdf' %}" download="Pratham_Sharma_Resume.pdf" class="inline-flex items-center px-8 py-4 bg-transparent border-2 border-teal-500 text-teal-400 hover:bg-teal-500 hover:text-[#111418] rounded-full font-bold transition duration-300 font-mono text-sm shadow-[0_0_15px_rgba(20,184,166,0.3)] hover:shadow-[0_0_25px_rgba(20,184,166,0.6)]">
+            <a href="{% static 'PEV_CV_Pratham_2025_last.pdf' %}" download="Pratham_Sharma_Resume.pdf" class="inline-flex items-center px-8 py-4 bg-transparent border-2 border-teal-500 text-teal-400 hover:bg-teal-500 hover:text-[#111418] rounded-full font-bold transition duration-300 font-mono text-sm shadow-[0_0_15px_rgba(20,184,166,0.3)] hover:shadow-[0_0_25px_rgba(20,184,166,0.6)]">
                 <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
                 Download Resume
             </a>
