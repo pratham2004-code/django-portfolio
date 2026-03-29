@@ -1,0 +1,17 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environments
+venv/
+env/
+
+# Database
+db.sqlite3
+
+# Static files (if you collect them later)
+staticfiles/
+
+# OS generated files
+.DS_Store

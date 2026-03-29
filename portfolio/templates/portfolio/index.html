@@ -1,0 +1,256 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pratham Sharma | Portfolio</title>
+    <!-- Using Tailwind CSS for clean, single-file styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@300;400;600;800&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #111418;
+            color: #e2e8f0;
+            overflow-x: hidden;
+        }
+        .font-mono { font-family: 'JetBrains Mono', monospace; }
+        
+        /* 3D Lighting / Ambient Glow Effects */
+        .ambient-glow {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(120px);
+            z-index: 0;
+            pointer-events: none;
+        }
+        .glow-cyan { background: rgba(45, 212, 191, 0.15); width: 400px; height: 400px; top: 10%; right: 10%; }
+        .glow-orange { background: rgba(251, 146, 60, 0.15); width: 500px; height: 500px; bottom: 20%; left: -10%; }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+        }
+    </style>
+</head>
+<body class="relative antialiased selection:bg-teal-500/30">
+
+    <!-- Ambient Background Glows -->
+    <div class="ambient-glow glow-cyan"></div>
+    <div class="ambient-glow glow-orange"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full top-0 z-50 glass-card border-b-0 border-white/5 py-5 px-8 flex justify-between items-center">
+        <a href="#home" class="text-teal-400 font-mono text-xl font-bold tracking-wider">Pratham._</a>
+        <div class="hidden md:flex space-x-12 font-mono text-sm text-gray-400">
+            <a href="#home" class="hover:text-white transition group text-center">
+                <span class="text-xs text-teal-500/50 group-hover:text-teal-400 transition">01</span><br/>// home
+            </a>
+            <a href="#skills" class="hover:text-white transition group text-center">
+                <span class="text-xs text-teal-500/50 group-hover:text-teal-400 transition">02</span><br/>// skills
+            </a>
+            <a href="#projects" class="hover:text-white transition group text-center">
+                <span class="text-xs text-teal-500/50 group-hover:text-teal-400 transition">03</span><br/>// projects
+            </a>
+            <a href="#education" class="hover:text-white transition group text-center">
+                <span class="text-xs text-teal-500/50 group-hover:text-teal-400 transition">04</span><br/>// background
+            </a>
+            <a href="#contact" class="hover:text-white transition group text-center">
+                <span class="text-xs text-teal-500/50 group-hover:text-teal-400 transition">05</span><br/>// contact
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex flex-col justify-center items-center text-center relative z-10 px-4 pt-20">
+        <h1 class="text-6xl md:text-8xl lg:text-9xl font-black text-white tracking-tighter uppercase mb-6 drop-shadow-2xl">
+            Pratham <span class="text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-500">Sharma</span>
+        </h1>
+        
+        <!-- Updated Titles for AI/ML -->
+        <p class="text-gray-400 tracking-[0.2em] font-mono uppercase text-sm md:text-base max-w-2xl leading-relaxed">
+            AI/ML Engineer <span class="text-teal-500 px-2">•</span> NLP Specialist <span class="text-teal-500 px-2">•</span> Java & Python Developer
+        </p>
+        
+        <!-- Updated Summary -->
+        <p class="mt-8 text-gray-300 max-w-2xl text-base md:text-lg leading-relaxed">
+            I am a CS student at LPU specializing in AI/ML. Passionate about Natural Language Processing, I leverage Java and Python to build intelligent algorithms and scalable, data-driven solutions.
+        </p>
+        
+        <div class="mt-10 flex space-x-6 font-mono text-sm">
+            <a href="https://github.com/pratham2004-code" target="_blank" class="px-6 py-3 glass-card rounded-full hover:bg-white/10 transition border border-white/10 text-white">GitHub</a>
+            <a href="https://www.linkedin.com/in/pratham-sharma142004" target="_blank" class="px-6 py-3 bg-teal-600 hover:bg-teal-500 text-white rounded-full transition shadow-lg shadow-teal-500/20">LinkedIn</a>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-24 px-6 max-w-6xl mx-auto relative z-10">
+        <h2 class="text-3xl md:text-4xl font-bold mb-16 text-white"><span class="text-teal-400 font-mono text-xl mr-4">02.</span>Skills & Expertise</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {% if categories %}
+                {% for category in categories %}
+                <div class="glass-card p-8 rounded-2xl hover:-translate-y-2 transition duration-300">
+                    <h3 class="text-xl font-semibold mb-6 text-teal-300">{{ category.name }}</h3>
+                    <ul class="space-y-3 text-gray-400 font-mono text-sm">
+                        {% for skill in category.skills.all %}
+                        <li class="flex items-center"><span class="w-1.5 h-1.5 rounded-full bg-orange-400 mr-3"></span>{{ skill.name }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% endfor %}
+            {% else %}
+                <div class="glass-card p-8 rounded-2xl hover:-translate-y-2 transition duration-300">
+                    <h3 class="text-xl font-semibold mb-6 text-teal-300">Languages</h3>
+                    <ul class="space-y-3 text-gray-400 font-mono text-sm">
+                        <li class="flex items-center"><span class="w-1.5 h-1.5 rounded-full bg-orange-400 mr-3"></span>Java</li>
+                        <li class="flex items-center"><span class="w-1.5 h-1.5 rounded-full bg-orange-400 mr-3"></span>C++</li>
+                        <li class="flex items-center"><span class="w-1.5 h-1.5 rounded-full bg-orange-400 mr-3"></span>JavaScript</li>
+                        <li class="flex items-center"><span class="w-1.5 h-1.5 rounded-full bg-orange-400 mr-3"></span>Python</li>
+                    </ul>
+                </div>
+                <div class="glass-card p-8 rounded-2xl hover:-translate-y-2 transition duration-300">
+                    <h3 class="text-xl font-semibold mb-6 text-purple-300">Frameworks</h3>
+                    <ul class="space-y-3 text-gray-400 font-mono text-sm">
+                        <li class="flex items-center"><span class="w-1.5 h-1.5 rounded-full bg-teal-400 mr-3"></span>React.js</li>
+                        <li class="flex items-center"><span class="w-1.5 h-1.5 rounded-full bg-teal-400 mr-3"></span>Node.js</li>
+                        <li class="flex items-center"><span class="w-1.5 h-1.5 rounded-full bg-teal-400 mr-3"></span>HTML / CSS</li>
+                        <li class="flex items-center"><span class="w-1.5 h-1.5 rounded-full bg-teal-400 mr-3"></span>Django</li>
+                    </ul>
+                </div>
+                <div class="glass-card p-8 rounded-2xl hover:-translate-y-2 transition duration-300">
+                    <h3 class="text-xl font-semibold mb-6 text-orange-300">Tools & Platforms</h3>
+                    <ul class="space-y-3 text-gray-400 font-mono text-sm">
+                        <li class="flex items-center"><span class="w-1.5 h-1.5 rounded-full bg-purple-400 mr-3"></span>MySQL & MongoDB</li>
+                        <li class="flex items-center"><span class="w-1.5 h-1.5 rounded-full bg-purple-400 mr-3"></span>Git & GitHub</li>
+                        <li class="flex items-center"><span class="w-1.5 h-1.5 rounded-full bg-purple-400 mr-3"></span>Google Colab</li>
+                    </ul>
+                </div>
+            {% endif %}
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-24 px-6 max-w-6xl mx-auto relative z-10">
+        <h2 class="text-3xl md:text-4xl font-bold mb-16 text-white"><span class="text-teal-400 font-mono text-xl mr-4">03.</span>Selected Works</h2>
+        
+        <div class="space-y-8">
+            {% if projects %}
+                {% for project in projects %}
+                <div class="glass-card p-8 rounded-2xl flex flex-col md:flex-row justify-between items-start md:items-center group hover:bg-white/5 transition">
+                    <div class="max-w-3xl">
+                        <p class="text-teal-400 font-mono text-sm mb-2">{{ project.duration }}</p>
+                        <h3 class="text-2xl font-bold text-white mb-3">{{ project.title }}</h3>
+                        <p class="text-gray-400 mb-6 text-sm leading-relaxed">{{ project.description }}</p>
+                        <div class="flex flex-wrap gap-2">
+                            {% for tech in project.get_tech_list %}
+                            <span class="px-3 py-1 bg-teal-900/30 text-teal-200 rounded-full text-xs font-mono border border-teal-500/20">{{ tech }}</span>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% if project.github_link %}
+                    <a href="{{ project.github_link }}" target="_blank" class="mt-6 md:mt-0 text-gray-400 hover:text-white transition" title="View on GitHub">
+                        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd"/></svg>
+                    </a>
+                    {% endif %}
+                </div>
+                {% endfor %}
+            {% else %}
+                <div class="glass-card p-8 rounded-2xl flex flex-col md:flex-row justify-between items-start md:items-center group hover:bg-white/5 transition">
+                    <div class="max-w-3xl">
+                        <p class="text-teal-400 font-mono text-sm mb-2">Nov 2025 - Present</p>
+                        <h3 class="text-2xl font-bold text-white mb-3">Smart Product Recommendation System</h3>
+                        <p class="text-gray-400 mb-6 text-sm leading-relaxed">Designed an intelligent recommendation engine to personalize product suggestions. Engineered a collaborative filtering model and connected it to a dynamic frontend via Flask REST APIs. Elevated model precision by 12%.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-teal-900/30 text-teal-200 rounded-full text-xs font-mono border border-teal-500/20">Python</span>
+                            <span class="px-3 py-1 bg-teal-900/30 text-teal-200 rounded-full text-xs font-mono border border-teal-500/20">Scikit-Learn</span>
+                            <span class="px-3 py-1 bg-teal-900/30 text-teal-200 rounded-full text-xs font-mono border border-teal-500/20">Flask</span>
+                        </div>
+                    </div>
+                    <a href="https://github.com/pratham2004-code" target="_blank" class="mt-6 md:mt-0 text-gray-400 hover:text-white transition" title="View on GitHub">
+                        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd"/></svg>
+                    </a>
+                </div>
+            {% endif %}
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="py-24 px-6 max-w-4xl mx-auto relative z-10">
+        <h2 class="text-3xl md:text-4xl font-bold mb-16 text-white text-center"><span class="text-teal-400 font-mono text-xl mr-4">04.</span>Education & Background</h2>
+        
+        <div class="border-l border-white/10 ml-4 md:ml-0 pl-8 space-y-12">
+            {% if education %}
+                {% for ed in education %}
+                <div class="relative">
+                    <div class="absolute -left-10 w-4 h-4 rounded-full bg-teal-500 border-4 border-[#111418] top-1"></div>
+                    <p class="text-teal-400 font-mono text-sm mb-1">{{ ed.duration }}</p>
+                    <h3 class="text-xl font-bold text-white">{{ ed.institution }}</h3>
+                    <p class="text-gray-300">{{ ed.degree }}</p>
+                    <p class="text-gray-500 text-sm mt-2">Score/CGPA: <span class="text-white">{{ ed.score }}</span></p>
+                </div>
+                {% endfor %}
+            {% else %}
+                <div class="relative">
+                    <div class="absolute -left-[39px] w-4 h-4 rounded-full bg-teal-500 border-4 border-[#111418] top-1"></div>
+                    <p class="text-teal-400 font-mono text-sm mb-1">Aug 2023 - Present</p>
+                    <h3 class="text-xl font-bold text-white">Lovely Professional University (Punjab, India)</h3>
+                    <p class="text-gray-300">Bachelor of Technology - Computer Science and Engineering</p>
+                    <p class="text-gray-500 text-sm mt-2">CGPA: <span class="text-white">5.9</span></p>
+                </div>
+            {% endif %}
+        </div>
+    </section>
+
+    <!-- Contact Section & Resume Download -->
+    <section id="contact" class="py-24 px-6 max-w-2xl mx-auto relative z-10 text-center">
+        <h2 class="text-3xl md:text-4xl font-bold mb-6 text-white"><span class="text-teal-400 font-mono text-xl mr-4">05.</span>Get In Touch</h2>
+        <p class="text-gray-400 mb-10">Whether you have a question or just want to say hi, my inbox is always open.</p>
+        
+        {% if messages %}
+        <div class="mb-6 p-4 bg-teal-900/50 border border-teal-500 text-teal-200 rounded-lg">
+            {% for message in messages %}
+                {{ message }}
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <form method="POST" action="{% url 'home' %}#contact" class="glass-card p-8 rounded-2xl text-left space-y-6">
+            {% csrf_token %}
+            <div>
+                <label class="block text-sm font-mono text-gray-400 mb-2">Name</label>
+                <input type="text" name="name" required class="w-full bg-black/30 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-teal-500 transition">
+            </div>
+            <div>
+                <label class="block text-sm font-mono text-gray-400 mb-2">Email</label>
+                <input type="email" name="email" required class="w-full bg-black/30 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-teal-500 transition">
+            </div>
+            <div>
+                <label class="block text-sm font-mono text-gray-400 mb-2">Message</label>
+                <textarea name="message" rows="4" required class="w-full bg-black/30 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-teal-500 transition"></textarea>
+            </div>
+            <button type="submit" class="w-full py-4 bg-teal-600 hover:bg-teal-500 text-white rounded-lg font-bold transition">Send Message</button>
+        </form>
+
+        <div class="mt-10 font-mono text-sm text-gray-500 mb-12">
+            <p>pratham2149@gmail.com | +91 8278735288</p>
+        </div>
+
+        <!-- DOWNLOAD RESUME BUTTON -->
+        <div class="pt-8 border-t border-white/10">
+            <a href="{% static 'pratham_resume.pdf' %}" download="Pratham_Sharma_Resume.pdf" class="inline-flex items-center px-8 py-4 bg-transparent border-2 border-teal-500 text-teal-400 hover:bg-teal-500 hover:text-[#111418] rounded-full font-bold transition duration-300 font-mono text-sm shadow-[0_0_15px_rgba(20,184,166,0.3)] hover:shadow-[0_0_25px_rgba(20,184,166,0.6)]">
+                <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                Download Resume
+            </a>
+        </div>
+    </section>
+
+    <footer class="py-8 text-center text-gray-600 font-mono text-xs border-t border-white/5 relative z-10 mt-12">
+        <p>Built by Pratham Sharma. Styled with Tailwind CSS.</p>
+    </footer>
+
+</body>
+</html>
