@@ -49,6 +49,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware', 
 ]
 
 ROOT_URLCONF = 'core.urls'
@@ -138,3 +139,12 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'pratham2149@gmail.com'  # Your Gmail address
 EMAIL_HOST_PASSWORD = 'your-16-character-app-password-here'  # No spaces!
 
+import os
+
+SECRET_KEY = os.environ.get('SECRET_KEY', 'fallback-for-dev-only')
+DEBUG = os.environ.get('DEBUG', 'False') == 'True'
+ALLOWED_HOSTS = ['your-app-name.railway.app']  # your deployed URL
+
+# For serving static files in production
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
