@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-vmxp)rs3es8%vi8yhmg-p&dtm+j**1m46n$$xr5fos&4on1#9k
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
-
+CSRF_TRUSTED_ORIGINS = ['https://django-portfolio-production-b515.up.railway.app']
 
 # Application definition
 
